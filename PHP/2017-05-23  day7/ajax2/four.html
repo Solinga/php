@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form name="myform">
+		<input type="text" name="user">
+		<input type="password" name="pwd">
+		<input type="submit" value="提交" onclick="test()">
+	</form>
+	<script type="text/javascript">
+		function test(){
+			alert(document.myform.user.value);
+			alert(document.myform.pwd.value);
+		}
+		//1、获取对象
+		function getXHR(){
+			if (window.XMLHttpRequest) {
+				return new XMLHttpRequest();
+			}
+			else{
+				return new ActiveXObject("Microsoft.XMLHTTP")
+			}
+		}
+		//2、创建请求
+		var xhr=getXHR();
+		xhr.open('POST','url');
+		//3、回调函数
+		xhr.onreadystatechange=function(){
+				if (xhr.readyState==4&&xhr.status==200) {
+					// console.log(xhr.responseText);
+					// 解析json xhr.responseText()
+					// 3.1、将json转变为对象
+					var data=JSON.parse(xhr.responseText);
+					for(i=data.books.length-1;i>=0;i--){
+						var book=data.books[i];
+						console.log(book.bookname);
+						//创建li,放内容
+						var li=document.createElement('li');
+						li.innerHTML=book.bookname;
+						// document.getElementById('booklist').appendChild(li);
+					}
+				}
+			}
+			//将字符串转变JSON，键是后台要求的
+			var data=JSON.stringify({
+				"uesr":document.myform.user.value,
+				"pwd":document.myform.pwd.value
+				});
+			//4、发送成功
+			xhr.send(data);
+	</script>
+</body>
+</html>

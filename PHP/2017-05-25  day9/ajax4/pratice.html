@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.0.js"></script>
+</head>
+<body>
+	<table id="tab"></table>
+	<script type="text/javascript">
+	//API开放：阿里，百度，聚合，野狗
+		$.ajax({
+			type:'post',
+			url:"http://route.showapi.com/9-9",
+			data:{
+				'showapi_appid':'38922',
+				'showapi_sign':'82272f0438ba41eaa9ce96e5de89df7f',
+				'areaid':'101260101'
+			},
+			success:function(result){
+				var wheater=result.showapi_res_body.dayList;
+				for(i=0;i<wheater.length-1;i++){
+					console.log(wheater[i]);
+					for (var key in wheater[i]) {
+						
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

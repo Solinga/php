@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<select id="city" onchange="getCity()"></select>
+	<script type="text/javascript">
+		function getXHR(){
+			if (window.XMLHttpRequest) {
+				//大部分浏览器
+				return new XMLHttpRequest();
+			}
+			else{
+				//针对IE5，6用下面的方法
+				return new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		
+		function getCity(){
+			//1\创建ajax对象
+			var request=getXHR();
+			//2创建请求
+			request.open('GET','city.php',true);
+			//3、设置回调函数
+			request.onreadystatechange=function(){
+				//3.1根据状态处理
+				if (request.readyState==4 && request.status==200){
+					//3.2处理响应
+					// console.log(request.responseText);
+					var citys=request.responseText.split(',');
+					// console.log(citys);
+					for(var i=0;i<citys.length;i++){
+						var city =citys[i];
+						//将数组的值添加到下拉框
+						//第一种方法
+						// var opt=document.createElement('option');
+						// opt.innerHTML=city;
+						 
+						// 第二种方法
+						// new Option有四个方法：new Option(lable,value,true,true)
+						// lable 显示出来的
+						// value 传进去的值
+						//true,true 是默认被选中和有效
+						var opt=new Option(city,city);
+						document.getElementById('city').appendChild(opt);
+					}
+				}
+			}
+			//4、发送成功
+			request.send(null);
+		}
+		getCity();
+	</script>
+</body>
+</html>

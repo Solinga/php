@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.0.js"></script>
+</head>
+<body>
+	<table id="tab"></table>
+	<script type="text/javascript">
+	//API开放：阿里，百度，聚合，野狗
+		$.ajax({
+			type:'post',
+			url:"http://route.showapi.com/9-9",
+			data:{
+				'showapi_appid':'38922',
+				'showapi_sign':'82272f0438ba41eaa9ce96e5de89df7f',
+				'areaid':'101260101'
+			},
+			success:function(result){
+				console.log(result);
+				// console.log(result.showapi_res_body);
+				// console.log(result.showapi_res_body.dayList);
+				// console.log(result.showapi_res_body.dayList[0].day_air_temperature);
+				// console.log(result.showapi_res_body.dayList);
+				var wheater=result.showapi_res_body.dayList;
+				for(i=0;i<wheater.length-1;i++){
+					var list=wheater[i];
+					var tr=document.createElement('tr');
+					document.getElementById('tab').appendChild(tr);
+					for (var key in list) {
+						var td=document.createElement('td');
+						td.innerHTML=list[key];
+						document.querySelectorAll('tr')[i].appendChild(td);
+					}
+					var img=document.createElement('img');
+					var tr1=document.querySelectorAll('tr')[i];
+					var td1=tr1.querySelectorAll('td')[8];
+					var cont=td1.innerHTML;
+					td1.innerHTML='';
+					img.src=cont;
+					td1.appendChild(img);
+
+					var img1=document.createElement('img');
+					var tr2=document.querySelectorAll('tr')[i];
+					var td2=tr2.querySelectorAll('td')[13];
+					var cont1=td2.innerHTML;
+					td2.innerHTML='';
+					img1.src=cont1;
+					td2.appendChild(img1);
+				}
+			}
+		});
+	</script>
+</body>
+</html>

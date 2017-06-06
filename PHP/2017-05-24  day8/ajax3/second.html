@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.0.js"></script>
+</head>
+<body>
+	<!-- get方法 -->
+	<input type="button" id="btn" value="提交">
+	<script type="text/javascript">
+		$('#btn').click(function(){
+			//发送get请求:get(url,请求参数，回调函数，服务器返回的数据类型)回调函数的调用时间在服务器返回数据的时候,及时处理服务器返回的数据
+			//data参数负责接收服务器返回的数据
+			//json服务器返回的数据类型，可以返回txt,xml,html,script脚本
+			var user={"name":"xiaozhu","pwd":"123" };
+			$.get("text_json.php",user,function(data){
+				console.log(data);
+			},"json");
+		});
+	</script>
+</body>
+</html>

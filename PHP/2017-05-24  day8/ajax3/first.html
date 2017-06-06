@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.2.0.js"></script>
+</head>
+<body>
+	<div id="mydiv"></div>
+	<script type="text/javascript">
+	//load方法:将服务器返回的数据添加到符合要求的节点上面
+	//load('url',参数)，第一个参数是一个地址，第二个参数是请求参数，如果有参数，发送post请求，没有参数发送get请求
+		$('#mydiv').load('test-load.php',{user:'abc'});
+	</script>
+</body>
+</html>
